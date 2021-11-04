@@ -2,7 +2,7 @@
 **
 ** CommandsManagementClass for JavaScript GameTest by @ZamyArkreNendmed
 **
-** Version 0.0.1 - November 3rd 2021
+** Version 0.0.2 - November 3rd 2021
 **
 ** Created for the Minecraft GameTest feature.
 **
@@ -308,7 +308,7 @@ export default class CommandsManagementClass {
       commandFailedAPI.entity = entityInstance;
       if (typeof onCallback === "function") onCallback(commandFailedAPI);
       if (showErrors) {
-        const rawtextJSON = { "rawtext": [ { "translate": `§c${commandFailedAPI.statusMessage}` } ] };
+        const rawtextJSON = { "rawtext": [ { "translate": this.options.pre_error_text + commandFailedAPI.statusMessage } ] };
         Commands.run(`tellraw ${entityInstance.name.split(" ").length > 1 ? "\"" + entityInstance.name + "\"" : entityInstance.name} ${JSON.stringify(rawtextJSON)}`, instance.currentDimension);
       }
     }
@@ -562,6 +562,7 @@ export default class CommandsManagementClass {
   #defaultOptions() {
     return {
       "prefix": "$",
+      "pre_error_text": "\u00a7\u0063",
       "show_errors": true
     };
   }
